@@ -15,3 +15,4 @@ class Config():
 
     DB = os.path.join(basedir, 'app\database\database.db')
     SQL = os.path.join(basedir, 'app\database\database.sql')
+    JSON = os.path.join(basedir, 'app\database\database.json')

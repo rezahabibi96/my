@@ -1,5 +1,5 @@
 from controller import events as events_ct
-from flask import Blueprint, request, make_response, render_template
+from flask import Blueprint, render_template
 
 
 events_bp = Blueprint('events', __name__)

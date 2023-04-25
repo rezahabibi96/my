@@ -1,5 +1,5 @@
 from forms import auth as auth_fr
-from models import users as users_md
+from models import users as users_md, students as students_md
 from flask import redirect, render_template, url_for
 from flask_login import logout_user, login_user, current_user, login_required
 
@@ -34,9 +34,12 @@ def signup(request):
         
         else:         
             pw = users_md.bc.generate_password_hash(password)
+            
             user = users_md.Users(id, fullname, username, email, pw)
-
             user.save()
+
+            student = students_md.Students(id_student=id)
+            student.save()
 
             msg = 'User created, <a href="' + url_for('auth.signin') + '">Click here</a>!'
             success = True

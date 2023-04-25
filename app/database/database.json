@@ -1,0 +1,202 @@
+{
+    "users": [
+        {
+            "id": "196012131986012001",
+            "fullname": "Dra. Destri Susilaningrum, M.Si",
+            "username": "196012131986012001",
+            "email": "196012131986012001@its.ac.id",
+            "role": "dosen",
+            "password": "196012131986012001"
+        },
+        {
+            "id": "196101311987012001",
+            "fullname": "Dra. Lucia Aridinanti, MT",
+            "username": "196101311987012001",
+            "email": "196101311987012001",
+            "role": "dosen",
+            "password": "196101311987012001"
+        },
+        {
+            "id": "196103111987012001",
+            "fullname": "Dra. Sri Mumpuni Retnaningsih, MT",
+            "username": "196103111987012001",
+            "email": "196103111987012001",
+            "role": "dosen",
+            "password": "196103111987012001"
+        },
+        {
+            "id": "196206031987012001",
+            "fullname": "Ir. Sri Pingit Wulandari, M.Si",
+            "username": "196206031987012001",
+            "email": "196206031987012001",
+            "role": "dosen",
+            "password": "196206031987012001"
+        },
+        {
+            "id": "196601251990021001",
+            "fullname": "Dr. Drs. Brodjol Sutijo Supri Ulama, M.Si",
+            "username": "196601251990021001",
+            "email": "196601251990021001",
+            "role": "dosen",
+            "password": "196601251990021001"
+        },
+        {
+            "id": "197212071997022001",
+            "fullname": "Dr. Dwi Endah Kusrini, S.Si, M.Si",
+            "username": "197212071997022001",
+            "email": "197212071997022001",
+            "role": "dosen",
+            "password": "197212071997022001"
+        },
+        {
+            "id": "197403281998021001",
+            "fullname": "Dr. Wahyu Wibowo, S.Si, M.Si",
+            "username": "197403281998021001",
+            "email": "197403281998021001",
+            "role": "dosen",
+            "password": "197403281998021001"
+        },
+        {
+            "id": "198711302015042002",
+            "fullname": "Noviyanti Santoso, S.Si, M.Si",
+            "username": "198711302015042002",
+            "email": "198711302015042002",
+            "role": "dosen",
+            "password": "198711302015042002"
+        },
+        {
+            "id": "199106102015042001",
+            "fullname": "Iis Dewi Ratih, S.Si, M.Si",
+            "username": "199106102015042001",
+            "email": "199106102015042001",
+            "role": "dosen",
+            "password": "199106102015042001"
+        },
+        {
+            "id": "0027079402",
+            "fullname": "Zakiyatul Wildani",
+            "username": "0027079402",
+            "email": "0027079402",
+            "role": "dosen",
+            "password": "0027079402"
+        },
+        {
+            "id": "0013119201",
+            "fullname": "Mukti Ratna Dewi",
+            "username": "0013119201",
+            "email": "0013119201",
+            "role": "dosen",
+            "password": "0013119201"
+        },
+        {
+            "id": "2022199612050",
+            "fullname": "Fausania Hibatullah, S.Si, M.Si",
+            "username": "2022199612050",
+            "email": "2022199612050",
+            "role": "dosen",
+            "password": "2022199612050"
+        },
+        {
+            "id": "2022199711052",
+            "fullname": "Muhammad Alifian Nuriman, S.Si, M.Si",
+            "username": "2022199711052",
+            "email": "2022199711052",
+            "role": "dosen",
+            "password": "2022199711052"
+        },
+        {
+            "id": "2022199611051",
+            "fullname": "Mochammad Reza Habibi",
+            "username": "2022199611051",
+            "email": "2022199611051",
+            "role": "dosen",
+            "password": "2022199611051"
+        },
+        {
+            "id": "1101",
+            "fullname": "Himpunan Mahasiswa Statistika Bisnis",
+            "username": "himadata",
+            "email": "himadata@its.ac.id",
+            "role": "hima",
+            "password": "1101"
+        },
+        {
+            "id": "2201",
+            "fullname": "Tenaga Kependidikan Statistika Bisnis",
+            "username": "dsbf",
+            "email": "dsbf@its.ac.id",
+            "role": "tendik",
+            "password": "2201"
+        }
+    ],
+    "lecturers": [
+        {
+            "id_lecturer": "196012131986012001",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "196101311987012001",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "196103111987012001",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "196206031987012001",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "196601251990021001",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "197212071997022001",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "197403281998021001",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "198711302015042002",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "199106102015042001",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "0027079402",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "0013119201",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "2022199612050",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "2022199711052",
+            "research_interest": "NULL"
+        },
+        {
+            "id_lecturer": "2022199611051",
+            "research_interest": "NULL"
+        }
+    ],
+    "hima": [
+        {
+            "id_hima": "1101",
+            "divisi": "NULL"            
+        }
+    ],
+    "tendik": [
+        {
+            "id_tendik": "2201",
+            "bagian": "NULL"
+        }
+    ]
+}

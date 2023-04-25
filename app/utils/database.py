@@ -1,12 +1,12 @@
-from config import Config
-from sqlite3 import Error
-import sqlite3, os
+from .config import Config
+import sqlite3
+import os
 
 
 DB = Config.DB
 SQL = Config.SQL
 
-def init():
+def init(app=None):
   if os.path.exists(DB):
     os.remove(DB)
 
@@ -19,5 +19,3 @@ def init():
   conn.close() 
 
   print("database created")
-  
-init()

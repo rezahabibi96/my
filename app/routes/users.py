@@ -1,16 +1,37 @@
 from controller import users as users_ct
-from flask import Blueprint, request, make_response, render_template, redirect, url_for
+from flask import Blueprint, request, render_template, redirect, url_for, make_response
 from flask_login import current_user, login_required
 
 
 users_bp = Blueprint('users', __name__)
 
-@users_bp.route("/users/profile", methods=["GET"])
+@users_bp.route("/users/home", methods=["GET"])
+def get_home():
+    if not current_user.is_authenticated:
+        return redirect(url_for('index'))
+    
+    data =  users_ct.get_home()
+    return render_template('users/home.html', data=data)
+
+@users_bp.route("/users/profile", methods=["GET", "POST"])
+@users_bp.route("/users/profile/edit", methods=["GET", "POST"])
 def get_profile():
     if not current_user.is_authenticated:
         return redirect(url_for('index'))
-    print(current_user.password, 'aa')
-    return {'a': 'a'}
     
-    data =  users_ct.get_profile()
-    return render_template('users/profile.html', data=data)
+    return users_ct.get_profile(request)
+
+@users_bp.route("/users/password", methods=["GET", "POST"])
+def get_password():
+    if not current_user.is_authenticated:
+        return redirect(url_for('index'))
+    
+    return users_ct.get_password(request)
+
+@users_bp.route("/users/students", methods=["GET", "POST"])
+def get_students():
+    pass
+
+@users_bp.route("/users/competitions", methods=["GET", "POST"])
+def get_competitions():
+    pass

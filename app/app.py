@@ -1,3 +1,4 @@
+from utils import database as init_db, populate as init_populate
 from models import users as users_md
 from routes import calendar as calendar_rt, auth as auth_rt, events as events_rt, users as users_rt
 from flask import Flask, render_template
@@ -23,13 +24,15 @@ app.register_blueprint(users_rt.users_bp)
 def index():
   return render_template("index.html")
 
-@app.route("/home", methods=["GET"])
-def home():
-  return render_template("users/profile.html")
+@app.route("/root", methods=["GET"])
+def root():
+  return render_template("events/get_events.html")
 
 @app.before_first_request
-def initialize_database():
-    pass
+def initialize_config():
+  # init_db.init()
+  # init_populate.init(app)
+  pass
 
 if __name__ == "__main__":
   app.run(HOST_NAME, HOST_PORT, debug=True) 

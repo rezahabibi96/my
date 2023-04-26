@@ -1,6 +1,6 @@
 from utils import database as init_db, populate as init_populate
 from models import users as users_md
-from routes import calendar as calendar_rt, auth as auth_rt, events as events_rt, users as users_rt
+from routes import calendar as calendar_rt, auth as auth_rt, events as events_rt, users as users_rt, supervisors as supervisors_rt
 from flask import Flask, render_template
 
 
@@ -19,6 +19,7 @@ app.register_blueprint(calendar_rt.calendar_bp)
 app.register_blueprint(auth_rt.auth_bp)
 app.register_blueprint(events_rt.events_bp)
 app.register_blueprint(users_rt.users_bp)
+app.register_blueprint(supervisors_rt.supervisors_bp)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -26,12 +27,13 @@ def index():
 
 @app.route("/root", methods=["GET"])
 def root():
-  return render_template("events/get_events.html")
+  return render_template("index.html")
 
 @app.before_first_request
 def initialize_config():
   # init_db.init()
   # init_populate.init(app)
+  pass
   pass
 
 if __name__ == "__main__":

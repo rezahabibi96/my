@@ -23,8 +23,8 @@
           <span class="fs-4">myDSB KompetisI</span>
         </a>
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-          <a class="me-3 py-2 text-dark text-decoration-none" href="#">Events</a>
-          <a class="me-3 py-2 text-dark text-decoration-none" href="#">Supervisors</a>
+          <a class="me-3 py-2 text-dark text-decoration-none" href="/events">Events</a>
+          <a class="me-3 py-2 text-dark text-decoration-none" href="/supervisors">Supervisors</a>
           {% if current_user.is_authenticated %}
             <a class="me-3 py-2 text-dark text-decoration-none" href="/signout">Sign out</a>
             <a class="py-2 text-dark text-decoration-none" href="/users/home">{{ current_user.username }}</a>
@@ -85,6 +85,10 @@
             <input type="checkbox" name="category" value="3">infografis <br>
             <input type="checkbox" name="category" value="4">karya ilmiah <br>
           </fieldset>
+        </div>
+        <div class="evt100">
+          <label>Detail</label>
+          <textarea name="detail" id="detail" cols="30" rows="10" style="width: 100%;"></textarea>
         </div>
         <div class="evt100">
           <input type="hidden" id="evtID">

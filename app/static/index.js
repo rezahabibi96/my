@@ -20,7 +20,9 @@ var cal = {
   hfEnd : null, hfTxt : null,
   hfColor : null, hfBG : null,
   hfDel : null,
-  hfCat : null,
+  hfCategory : null,
+  hfDetail : null,
+  hfDet : null,
 
   // (B) SUPPORT FUNCTIONS
   ajax : (req, data, onload) => {
@@ -51,7 +53,9 @@ var cal = {
     cal.hfColor = document.getElementById("evtColor");
     cal.hfBG = document.getElementById("evtBG");
     cal.hfDel = document.getElementById("evtDel");
-    cal.hfCat = document.getElementsByName("category");
+    cal.hfCategory = document.getElementsByName("category");
+    cal.hfDetail = document.getElementsByName("detail");
+    cal.hfDet = document.getElementById("evtDet");
 
     // (C2) MONTH AND YEAR SELECTOR
     let now = new Date(), nowMth = now.getMonth() + 1;
@@ -192,7 +196,6 @@ var cal = {
 
     // (F3) DRAW EVENTS
     if (Object.keys(cal.events).length > 0) { for (let [id,evt] of Object.entries(cal.events)) {
-      console.log(id, evt.t)
       // (F3-1) EVENT START END DAY
       let sd = new Date(evt.s), ed = new Date(evt.e);
       if (sd.getFullYear() < cal.sYear) { sd = 1; }
@@ -242,12 +245,15 @@ var cal = {
       cat = cal.events[id]["cat"];
       for(let idx=0; idx<cat.length; idx++) {
         val = cat[idx]
-        cal.hfCat[val-1].checked = true
+        cal.hfCategory[val-1].checked = true
       }
+      det = cal.events[id]["det"];
+      cal.hfDetail[0].value = det;
     } else {
       cal.hForm.reset();
       cal.hfID.value = "";
       cal.hfDel.style.display = "none";
+      cal.hfDet.style.display = "none";
     }
     cal.hFormWrap.show();
   },
@@ -259,16 +265,19 @@ var cal = {
     // c & b  : text & background color
     // t      : event text
     var cat = [];
-    for(let idx=0; idx<cal.hfCat.length; idx++) {  
-      if(cal.hfCat[idx].checked)
-        cat.push(cal.hfCat[idx].value);
+    var det = cal.hfDetail[0].value;
+    for(let idx=0; idx<cal.hfCategory.length; idx++) {  
+      if(cal.hfCategory[idx].checked)
+        cat.push(cal.hfCategory[idx].value);
     }
+    console.log(cal.hfDetail[0].value, 'lala')
     var data = {
       s : cal.hfStart.value.replace("T", " "),
       e : cal.hfEnd.value.replace("T", " "),
       t : cal.hfTxt.value,
       c : cal.hfColor.value,
       b : cal.hfBG.value,
+      det : det,
       cat : cat
     };
     if (cal.hfID.value != "") { data.id = parseInt(cal.hfID.value); }

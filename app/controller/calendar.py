@@ -40,20 +40,21 @@ def get(month, year):
     data[r[0]] = {
       "s" : r[1], "e" : r[2],
       "c" : r[4], "b" : r[5],
-      "t" : r[3],
+      "t" : r[3], 
+      "det" : r[6],
       "cat" : cat
     }
   conn.close()  
   return data
 
-def save (start, end, txt, color, bg, cat, id=None):
+def save (start, end, txt, color, bg, det, cat, id=None):
   conn = sqlite3.connect(DB)
   cursor = conn.cursor()
 
-  data = (start, end, txt, color, bg,)
+  data = (start, end, txt, color, bg, det,)
   
   if id is None:
-    sql = "INSERT INTO `events` (`start`, `end`, `text`, `color`, `bg`) VALUES (?,?,?,?,?)"
+    sql = "INSERT INTO `events` (`start`, `end`, `text`, `color`, `bg`, `detail`) VALUES (?,?,?,?,?,?)"
     cursor.execute(sql, data)
    
     data = []
@@ -66,7 +67,7 @@ def save (start, end, txt, color, bg, cat, id=None):
       sql = "INSERT INTO `events_categories` (`id_event`, `id_category`) VALUES (?,?)"
       cursor.executemany(sql, data)
   else:
-    sql = "UPDATE `events` SET `start`=?, `end`=?, `text`=?, `color`=?, `bg`=? WHERE `id`=?"
+    sql = "UPDATE `events` SET `start`=?, `end`=?, `text`=?, `color`=?, `bg`=?, `detail`=? WHERE `id`=?"
     data = data + (id,)
     cursor.execute(sql, data)
     cursor.execute("DELETE FROM `events_categories` WHERE `id_event`=?", (id,))

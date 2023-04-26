@@ -14,7 +14,7 @@ def get():
 @calendar_bp.route("/save/", methods=["POST"])
 def save():
   data = dict(request.form)
-  ok = calendar_ct.save(data["s"], data["e"], data["t"], data["c"], data["b"], data["cat"],
+  ok = calendar_ct.save(data["s"], data["e"], data["t"], data["c"], data["b"], data["det"], data["cat"],
                         data["id"] if "id" in data else None)
   msg = "OK" if ok else sys.last_value
   return make_response(msg, 200)

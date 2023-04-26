@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS events (
   text TEXT NOT NULL,
   color TEXT NOT NULL,
   bg TEXT NOT NULL,
+  detail TEXT NOT NULL,
   PRIMARY KEY("id" AUTOINCREMENT)
 );
 CREATE INDEX IF NOT EXISTS idx_start ON events (start);

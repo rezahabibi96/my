@@ -77,9 +77,7 @@
         </div>
         <div class="evt100">
           <fieldset>
-            <legend>
-              <label>Category</label>
-            </legend>
+            <label>Category</label>
             <input type="checkbox" name="category" value="1">data sains <br>
             <input type="checkbox" name="category" value="2">kewirausahaan <br>
             <input type="checkbox" name="category" value="3">infografis <br>
@@ -90,6 +88,27 @@
           <label>Detail</label>
           <textarea name="detail" id="detail" cols="30" rows="10" style="width: 100%;"></textarea>
         </div>
+        <div class="evt100" id="subevent">
+          <label style="display: inline;">Subevent</label>
+          <button onclick="addSub(); return false;" style="display: inline; width: 10%; background-color: rosybrown; border-color: rosybrown; padding-top: 3px;">+</button>
+        </div>
+        <div id="js">
+          <!-- <div id="se_00" style="width: 100%; display: flex;">
+            <div class="evt50">
+              <label>Keterangan</label>
+              <input name="keterangan" type="text" required>
+            </div>
+            <div class="evt30">
+              <label>Participant</label>
+              <input name="participant" type="number" style="width: 100%; padding-top: 6px;" required>
+            </div>
+            <div class="evt20">
+              <label>Remove</label>
+              <button onclick="delSub(); return false;" style="width: 63%; background-color: rosybrown; border-color: rosybrown; padding-top: 3px;">-</button>
+            </div>
+          </div> -->
+        </div>
+        
         <div class="evt100">
           <input type="hidden" id="evtID">
           <input type="button" id="evtDet" value="Detail">
@@ -98,7 +117,61 @@
         </div>
       </form>
     </dialog>
+
+    <script>
+var count = 0
+
+
+function addSub() {
+    count++;
+    const html_add = document.getElementById("js");
+
+    const html = `<div id="js_${count}" style="width: 100%; display: flex;">
+<div class="evt50">
+  <label>Keterangan</label>
+  <input name="keterangan" type="text" required>
+</div>
+<div class="evt30">
+  <label>Participant</label>
+  <input name="participant" type="number" style="width: 100%; padding-top: 6px;" required>
+</div>
+<div class="evt20">
+  <label>Remove</label>
+  <button onclick="delSub(); return false;" style="width: 63%; background-color: rosybrown; border-color: rosybrown; padding-top: 3px;">-</button>
+</div>
+</div>`;
+    html_add.insertAdjacentHTML('beforeend', html);
+}
+
+function post(path, query) {
+    axios.post(path, query).then(
+        (response) => {
+            let result = response.data;
+            console.log(result);
+        },
+        (error) => {
+            console.log(error);
+        }
+    );
+}
+
+function delSub() {
+    html_del = event.target.parentNode.parentNode;
+    id = html_del.id
+    
+    if (id.startsWith('js')) {
+      html_del.remove();
+    } else if (id.startsWith('se')) {
+      post("kill", {"id":id.split('_')[1]});
+      html_del.remove();
+    }
+    
+}
+    </script>
+
     <!-- JavaScript Bundle With Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- JavaScript Bundle With Popper -->
   </body>
 </html>

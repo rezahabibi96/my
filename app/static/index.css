@@ -132,3 +132,13 @@ body {
   color: #fff; background: var(--bg-color-c);
   cursor: pointer;
 }
+
+
+#calForm .evt30 { width: 30%; }
+#calForm .evt30, #calForm .evt100 { padding: 8px; }
+#calForm .evt30, #calForm .evt50 { padding: 8px; }
+
+#calForm .evt20 { width: 20%; }
+#calForm .evt20, #calForm .evt100 { padding: 8px; }
+#calForm .evt20, #calForm .evt50 { padding: 8px; }
+#calForm .evt20, #calForm .evt30 { padding: 8px; }

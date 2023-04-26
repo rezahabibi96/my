@@ -12,6 +12,16 @@ CREATE INDEX IF NOT EXISTS idx_start ON events (start);
 CREATE INDEX IF NOT EXISTS idx_end ON events (end);
 
 
+CREATE TABLE IF NOT EXISTS subevents (
+  id INTEGER,
+  id_event INTEGER,
+  keterangan TEXT,
+  maks INTEGER,
+  deleted BOOLEAN DEFAULT FALSE,
+  PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER,
   fullname TEXT NOT NULL,
@@ -21,7 +31,6 @@ CREATE TABLE IF NOT EXISTS users (
   password TEXT NOT NULL,
   PRIMARY KEY("id")
 );
-
 
 
 CREATE TABLE IF NOT EXISTS categories (

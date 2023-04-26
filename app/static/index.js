@@ -23,6 +23,9 @@ var cal = {
   hfCategory : null,
   hfDetail : null,
   hfDet : null,
+  //subevent//
+  hfJS : null,
+
 
   // (B) SUPPORT FUNCTIONS
   ajax : (req, data, onload) => {
@@ -56,6 +59,8 @@ var cal = {
     cal.hfCategory = document.getElementsByName("category");
     cal.hfDetail = document.getElementsByName("detail");
     cal.hfDet = document.getElementById("evtDet");
+    //subevent//
+    cal.hfJS = document.getElementById("js");
 
     // (C2) MONTH AND YEAR SELECTOR
     let now = new Date(), nowMth = now.getMonth() + 1;
@@ -249,11 +254,39 @@ var cal = {
       }
       det = cal.events[id]["det"];
       cal.hfDetail[0].value = det;
+      //subevent//
+      cal.hfJS.innerHTML = '';
+      const sub = cal.events[id]["subs"];
+      const html_js = document.getElementById("js");
+      for (let idx=0; idx<sub.length; idx++) {
+        id = sub[idx][0]
+        ket = sub[idx][1]
+        part = sub[idx][2]
+
+        const html = `<div id="se_${id}" style="width: 100%; display: flex;">
+        <div class="evt50">
+          <label>Keterangan</label>
+          <input value="${ket}" name="keterangan" type="text" required>
+        </div>
+        <div class="evt30">
+          <label>Participant</label>
+          <input value="${part}" name="participant" type="number" style="width: 100%; padding-top: 6px;" required>
+        </div>
+        <div class="evt20">
+          <label>Remove</label>
+          <button onclick="delSub(); return false;" style="width: 63%; background-color: rosybrown; border-color: rosybrown; padding-top: 3px;">-</button>
+        </div>
+        </div>`;
+
+        html_js.insertAdjacentHTML('beforeend', html);
+      }
     } else {
       cal.hForm.reset();
       cal.hfID.value = "";
       cal.hfDel.style.display = "none";
       cal.hfDet.style.display = "none";
+      //subevent//
+      cal.hfJS.innerHTML = '';
     }
     cal.hFormWrap.show();
   },
@@ -266,11 +299,32 @@ var cal = {
     // t      : event text
     var cat = [];
     var det = cal.hfDetail[0].value;
+    
     for(let idx=0; idx<cal.hfCategory.length; idx++) {  
       if(cal.hfCategory[idx].checked)
         cat.push(cal.hfCategory[idx].value);
     }
-    console.log(cal.hfDetail[0].value, 'lala')
+    
+    //subevent//
+    var subs = {
+      "update" : [],
+      "create" : []
+    }
+    const html_js = document.getElementById("js");
+    const html_js_children = html_js.children;
+    for(let idx=0; idx<html_js_children.length; idx++) {  
+      child = html_js_children[idx]
+      id = child.id
+      inputs = document.querySelectorAll(`#${id} input`);
+      ket = inputs[0].value;
+      part = inputs[1].value;
+      if (id.startsWith('js')) {
+        subs["create"].push([id.split('_')[1], ket, part]);
+      } else if (id.startsWith('se')) {
+        subs["update"].push([id.split('_')[1], ket, part]);
+      }
+    }
+
     var data = {
       s : cal.hfStart.value.replace("T", " "),
       e : cal.hfEnd.value.replace("T", " "),
@@ -278,7 +332,9 @@ var cal = {
       c : cal.hfColor.value,
       b : cal.hfBG.value,
       det : det,
-      cat : cat
+      cat : cat,
+      //subevent//
+      subs : JSON.stringify(subs)
     };
     if (cal.hfID.value != "") { data.id = parseInt(cal.hfID.value); }
 

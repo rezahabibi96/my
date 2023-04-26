@@ -40,18 +40,18 @@
       </div>
       <div class="offcanvas-body px-0 h-auto">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
-          <li class="nav-item"><a style="padding: 0; background-color: white;" href="users/home" class="nav-link text-truncate text-dark"><i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span></a></li>
-          <li><a style="padding: 0; background-color: white;" href={% if current_user.role == 'dosen' %} /users/students {% else %} /users/competitions {% endif %} class="nav-link text-truncate text-dark"><i class="fs-5 bi-grid"></i><span class="ms-1 d-none d-sm-inline">
+          <li class="nav-item"><a style="margin: 0; background-color: white;" href="users/home" class="nav-link text-truncate text-dark"><i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span></a></li>
+          <li><a style="margin: 0; background-color: white;" href={% if current_user.role == 'dosen' %} /users/students {% else %} /users/competitions {% endif %} class="nav-link text-truncate text-dark"><i class="fs-5 bi-grid"></i><span class="ms-1 d-none d-sm-inline">
             {% if current_user.role == 'dosen' %}
             My Student
             {% else %}
             My Competition
             {% endif %}
           </span></a></li>
-          <li class="dropdown"><a style="padding: 0; background-color: white;" href="#" class="nav-link dropdown-toggle text-truncate text-dark" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="fs-5 bi-people"></i><span class="ms-1 d-none d-sm-inline">My Account</span></a>
+          <li class="dropdown"><a style="margin: 0; background-color: white;" href="#" class="nav-link dropdown-toggle text-truncate text-dark" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="fs-5 bi-people"></i><span class="ms-1 d-none d-sm-inline">My Account</span></a>
             <ul class="dropdown-menu text-small" aria-labelledby="dropdown">
-              <li><a style="padding: 2; background-color: white;" class="dropdown-item text-dark" href="/users/profile">My Profile</a></li>
-              <li><a style="padding: 2; background-color: white;" class="dropdown-item text-dark" href="/users/password">Change Password</a></li>
+              <li><a style="margin: 0; background-color: white;" class="dropdown-item text-dark" href="/users/profile">My Profile</a></li>
+              <li><a style="margin: 0; background-color: white;" class="dropdown-item text-dark" href="/users/password">Change Password</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

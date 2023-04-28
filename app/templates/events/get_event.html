@@ -68,6 +68,11 @@
       <button class="btn float-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button" style="padding: 0; height: 0;">
         <i class="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
       </button>
+      {% with messages = get_flashed_messages()[-1] %}
+      {% if messages %}
+        <p id="alert" class="alert alert-dark">{{ messages }}</p>
+      {% endif %}
+      {% endwith %}
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-lg-8 col-xl-6">
@@ -88,7 +93,7 @@
                   <div class="row">
                     <div class="col mb-3">
                       <p class="small text-muted mb-1">Event's Category:</p>
-                      <fieldset>
+                      <fieldset disabled>
                         <input type="checkbox" name="category" value="1" {% if 1 in data['cat'] %} checked {% endif %}> data sains <br>
                         <input type="checkbox" name="category" value="2" {% if 2 in data['cat'] %} checked {% endif %}> kewirausahaan <br>
                         <input type="checkbox" name="category" value="3" {% if 3 in data['cat'] %} checked {% endif %}> infografis <br>
@@ -96,27 +101,44 @@
                       </fieldset>
                     </div>
                     <div class="col mb-3">
-                      <p class="small text-muted mb-1">Choose Supervisor:</p>
-                      <p>
-                        <span class="small" name="supervisors" id="supervisors">
-                          <select>
-                            <option value="196012131986012001">Dra. Destri Susilaningrum, M.Si</option>
-                            <option value="196101311987012001">Dra. Lucia Aridinanti, MT</option>
-                            <option value="196103111987012001">Dra. Sri Mumpuni Retnaningsih, MT</option>
-                            <option value="196206031987012001">Ir. Sri Pingit Wulandari, M.Si</option>
-                            <option value="196601251990021001">Dr. Drs. Brodjol Sutijo Supri Ulama, M.Si</option>
-                            <option value="197212071997022001">Dr. Dwi Endah Kusrini, S.Si, M.Si</option>
-                            <option value="197403281998021001">Dr. Wahyu Wibowo, S.Si, M.Si</option>
-                            <option value="198711302015042002">Noviyanti Santoso, S.Si, M.Si</option>
-                            <option value="199106102015042001">Iis Dewi Ratih, S.Si, M.Si</option>
-                            <option value="2022199611051">Mochammad Reza Habibi</option>
-                            <option value="0027079402">Zakiyatul Wildani</option>
-                            <option value="0013119201">Mukti Ratna Dewi</option>
-                            <option value="2022199612050">Fausania Hibatullah, S.Si, M.Si</option>
-                            <option value="2022199711052">Muhammad Alifian Nuriman, S.Si, M.Si</option>
-                          </select>
-                        </span>
-                      </p>
+                      <div class="row">
+                        <p class="small text-muted mb-1">Choose Supervisor:</p>
+                        <p>
+                          <span class="small" name="supervisors" id="supervisors">
+                            <select {% if data["ep"] %} disabled {% endif %} >
+                              <option value="196012131986012001" {% if data["ep"] and data["ep"][0]|string == '196012131986012001' %} selected {% endif %}>Dra. Destri Susilaningrum, M.Si</option>
+                              <option value="196101311987012001" {% if data["ep"] and data["ep"][0]|string == '196101311987012001' %} selected {% endif %}>Dra. Lucia Aridinanti, MT</option>
+                              <option value="196103111987012001" {% if data["ep"] and data["ep"][0]|string == '196103111987012001' %} selected {% endif %}>Dra. Sri Mumpuni Retnaningsih, MT</option>
+                              <option value="196206031987012001" {% if data["ep"] and data["ep"][0]|string == '196206031987012001' %} selected {% endif %} >Ir. Sri Pingit Wulandari, M.Si</option>
+                              <option value="196601251990021001" {% if data["ep"] and data["ep"][0]|string == '196601251990021001' %} selected {% endif %} >Dr. Drs. Brodjol Sutijo Supri Ulama, M.Si</option>
+                              <option value="197212071997022001" {% if data["ep"] and data["ep"][0]|string == '197212071997022001' %} selected {% endif %}>Dr. Dwi Endah Kusrini, S.Si, M.Si</option>
+                              <option value="197403281998021001" {% if data["ep"] and data["ep"][0]|string == '197403281998021001' %} selected {% endif %}>Dr. Wahyu Wibowo, S.Si, M.Si</option>
+                              <option value="198711302015042002" {% if data["ep"] and data["ep"][0]|string == '198711302015042002' %} selected {% endif %}>Noviyanti Santoso, S.Si, M.Si</option>
+                              <option value="199106102015042001" {% if data["ep"] and data["ep"][0]|string == '199106102015042001' %} selected {% endif %}>Iis Dewi Ratih, S.Si, M.Si</option>
+                              <option value="1987202012015" {% if data["ep"] and data["ep"][0]|string == '1987202012015' %} selected {% endif %}>Nur Azizah, S.Si, M.Stat</option>
+                              <option value="2022199611051" {% if data["ep"] and data["ep"][0]|string == '2022199611051' %} selected {% endif %}>Mochammad Reza Habibi</option>
+                              <option value="0027079402" {% if data["ep"] and data["ep"][0]|string == '0027079402' %} selected {% endif %}>Zakiyatul Wildani</option>
+                              <option value="0013119201" {% if data["ep"] and data["ep"][0]|string == '0013119201' %} selected {% endif %}>Mukti Ratna Dewi</option>
+                              <option value="2022199612050" {% if data["ep"] and data["ep"][0]|string == '2022199612050' %} selected {% endif %}>Fausania Hibatullah, S.Si, M.Si</option>
+                              <option value="2022199711052" {% if data["ep"] and data["ep"][0]|string == '2022199711052' %} selected {% endif %}>Muhammad Alifian Nuriman, S.Si, M.Si</option>
+                            </select>
+                          </span>
+                        </p>
+                      </div>
+                      {% if data["subs"]|length > 0 %}
+                        <div class="row">
+                          <p class="small text-muted mb-1">Choose Subevent:</p>
+                          <p>
+                            <span class="small" name="subevents" id="subevents">
+                              <select {% if data["ep"] %} disabled {% endif %}>
+                                {% for sub in data["subs"] %}
+                                  <option value="{{ sub[0] }}" {% if data["ep"] and data["ep"][1] == sub[0]  %} selected {% endif %}>{{ sub[1] }}</option>
+                                {% endfor %}
+                              </select>
+                            </span>
+                          </p>
+                        </div>
+                      {% endif %}
                     </div>
                   </div>
                 </div>
@@ -129,10 +151,23 @@
                     <div>
                       <ul class="list-inline items d-flex justify-content-between">
                         <li class="list-inline-item items-list">
-                          <a href="">
-                            <p class="py-1 px-2 rounded text-white" style="background-color: #2e2c2c;" {% if not current_user.is_authenticated and current_user.role != 'dosen' %} hidden {% endif %}> Show Participants </p>
-                          </a>
+                          {% if current_user.is_authenticated and current_user.role == 'dosen' %}
+                            <a href="/events/{{ data["id"] }}/participants">
+                              <p class="py-1 px-2 rounded text-white" style="background-color: #2e2c2c;"> Show Participants </p>
+                            </a>
+                          {% elif current_user.is_authenticated and current_user.role == 'mahasiswa' %}
+                            <a {% if not data["ep"] %} href="#" onclick="onSupervisors(); return false;" {% endif %}>
+                              <p class="py-1 px-2 rounded text-white" style="background-color: #2e2c2c;"> Join Event </p>
+                            </a>
+                          {% endif %}
                         </li>
+                        {% if current_user.is_authenticated and current_user.role == 'mahasiswa' %}
+                          <li class="list-inline-item items-list">
+                            <a {% if data["ep"] %} href="/ep/{{ data["ep"][2] }}/bimbingan" {% endif %}>
+                              <p class="py-1 px-2 rounded text-white" style="background-color: #2e2c2c;" {% if not data["ep"] %} hidden {% endif %}> Riwayat Bimbingan </p>
+                            </a>
+                          </li>
+                        {% endif %}
                       </ul>
                     </div>
                   </div>
@@ -143,6 +178,35 @@
         </div>
       </div>
     </section>
+
+    <script>
+      function post(path, query) {
+        axios.post(path, query).then((response) => {
+          let result = response.data;
+          console.log(result);
+        },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+
+      function onSupervisors() {
+        supervisors = document.getElementById('supervisors');
+        s_children = supervisors.children[0];
+        s_index = s_children.selectedIndex;
+        s_value = parseInt(s_children[s_index].value);
+        console.log(s_value)
+      }
+      
+      setTimeout(function () {
+          document.getElementById('alert').remove()
+      }, 2000);
+    </script>
+
+    <!-- JavaScript Bundle With Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- JavaScript Bundle With Popper -->
   </body>
 </html>

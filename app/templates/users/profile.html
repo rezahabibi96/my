@@ -42,7 +42,7 @@
       </div>
       <div class="offcanvas-body px-0 h-auto">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
-          <li class="nav-item"><a href="users/home" class="nav-link text-truncate text-dark"><i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span></a></li>
+          <li class="nav-item"><a href="/users/home" class="nav-link text-truncate text-dark"><i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span></a></li>
           <li><a href={% if current_user.role == 'dosen' %} /users/students {% else %} /users/competitions {% endif %} class="nav-link text-truncate text-dark"><i class="fs-5 bi-grid"></i><span class="ms-1 d-none d-sm-inline">
             {% if current_user.role == 'dosen' %}
             My Student

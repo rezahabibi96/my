@@ -73,3 +73,23 @@ def get_password(request):
     else:
         flash('your supplied wrong password')
         return render_template('users/password.html')
+
+def get_mystudents():
+   conn = sqlite3.connect(DB)
+   cursor = conn.cursor()
+
+   cursor.execute("SELECT * FROM `events_participants` WHERE (`id_dosen` = ?)", (current_user.id,))
+   data = cursor.fetchall()
+
+   conn.close()  
+   return data
+
+def get_mycompetitions():
+   conn = sqlite3.connect(DB)
+   cursor = conn.cursor()
+
+   cursor.execute("SELECT * FROM `events_participants` WHERE (`id_mahasiswa` = ?)", (current_user.id,))
+   data = cursor.fetchall()
+
+   conn.close()  
+   return data

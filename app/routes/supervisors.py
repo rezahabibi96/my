@@ -6,6 +6,7 @@ supervisors_bp = Blueprint('supervisors', __name__)
 
 @supervisors_bp.route("/supervisors/<id_supervisor>", methods=["GET"])
 def get_supervisor(id_supervisor=None):
+  supervisors_ct.get_supervisor(id_supervisor)
   return render_template('supervisors/get_supervisor.html', id_supervisor)
 
 @supervisors_bp.route("/supervisors", methods=["GET"])

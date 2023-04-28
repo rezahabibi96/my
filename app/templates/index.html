@@ -35,6 +35,11 @@
         </nav>
       </div>
     </header>
+    {% with messages = get_flashed_messages()[-1] %}
+            {% if messages %}
+              <p id="alert" class="alert alert-dark text-center">{{ messages }}</p>
+            {% endif %}
+    {% endwith %}
     <!-- (A) PERIOD SELECTOR -->
     <div id="calHead" class="container">
       <div id="calPeriod">
@@ -43,7 +48,11 @@
         <input id="calYear" type="number">
         <input id="calNext" type="button" class="mi" value="&gt;">
       </div>
+      {% if current_user.is_authenticated and current_user.role == 'dosen' %}
       <input id="calAdd" type="button" class="mi" value="+">
+      {% else %}
+      <input id="calAdd" type="button" class="mi" value="+" hidden>
+      {% endif %}
     </div>
     <!-- (B) CALENDAR WRAPPER -->
     <div id="calWrap">
@@ -110,10 +119,17 @@
         </div>
         
         <div class="evt100">
+          {% if current_user.is_authenticated and current_user.role == 'dosen' %}
           <input type="hidden" id="evtID">
           <input type="button" id="evtDet" value="Detail">
           <input type="button" id="evtDel" value="Delete">
           <input type="submit" id="evtSave" value="Save">
+          {% else %}
+          <input type="hidden" id="evtID">
+          <input type="button" id="evtDet" value="Detail">
+          <input type="button" id="evtDel" value="Delete" hidden>
+          <input type="submit" id="evtSave" value="Save" hidden>
+          {% endif %}
         </div>
       </form>
     </dialog>
@@ -167,7 +183,11 @@ function delSub() {
     }
     
 }
-    </script>
+
+setTimeout(function () {
+    document.getElementById('alert').remove()
+}, 2000);
+  </script>
 
     <!-- JavaScript Bundle With Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/js/bootstrap.bundle.min.js"></script>

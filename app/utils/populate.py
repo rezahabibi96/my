@@ -1,4 +1,4 @@
-from models import users as users_md, lecturers as lecturers_md, hima as hima_md, tendik as tendik_md
+from models import users as users_md, lecturers as lecturers_md, hima as hima_md, tendik as tendik_md, students as students_md
 from .config import Config
 import json
   
@@ -16,7 +16,7 @@ def init(app):
                 user.save()
 
             for lecturer in data["lecturers"]:
-                lecturer = lecturers_md.Lecturers(lecturer['id_lecturer'], lecturer['research_interest'])
+                lecturer = lecturers_md.Lecturers(lecturer['id_lecturer'], lecturer['research_interest'], lecturer['research_group'])
                 lecturer.save()
 
             for hima in data["hima"]:
@@ -26,5 +26,9 @@ def init(app):
             for tendik in data["tendik"]:
                 tendik = tendik_md.Tendik(tendik['id_tendik'], tendik['bagian'])
                 tendik.save()
+
+            for student in data["students"]:
+                student = students_md.Students(student['id_student'], student['semester'])
+                student.save()    
 
         print('data populated')

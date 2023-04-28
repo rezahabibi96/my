@@ -86,6 +86,7 @@ var cal = {
     cal.hForm.onsubmit = () => cal.save();
     document.getElementById("evtCX").onclick = () => cal.hFormWrap.close();
     cal.hfDel.onclick = cal.del;
+    cal.hfDet.onclick = () => window.location=`/events/${cal.hfID.value}`
 
     // (C4) DRAW DAY NAMES
     let days = ["MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -247,6 +248,7 @@ var cal = {
       cal.hfColor.value = cal.events[id]["c"];
       cal.hfBG.value = cal.events[id]["b"];
       cal.hfDel.style.display = "inline-block";
+      cal.hfDet.style.display = "inline-block";
       cat = cal.events[id]["cat"];
       for(let idx=0; idx<cat.length; idx++) {
         val = cat[idx]
@@ -356,7 +358,7 @@ var cal = {
 
   // (I) DELETE EVENT
   del : () => { if (confirm("Delete Event?")) {
-    cal.ajax("cut", { id : parseInt(cal.hfID.value) }, res => {
+    cal.ajax("cut", { "id" : parseInt(cal.hfID.value) }, res => {
       if (res=="OK") {
         cal.hFormWrap.close();
         cal.load();

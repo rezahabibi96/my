@@ -41,7 +41,7 @@ def get(month, year):
 
 
     cursor.execute(
-      "SELECT `id`, `keterangan`, `maks` FROM `subevents` WHERE (`id_event` = ?)", (str(r[0]),)
+      "SELECT `id`, `keterangan`, `maks` FROM `subevents` WHERE ((`id_event` = ?) AND (`deleted` = 0))", (str(r[0]),)
     )
     subs = []
     for id_subevent, keterangan, maks in cursor.fetchall():
@@ -125,10 +125,17 @@ def cut(id):
 
   cursor.execute("DELETE FROM `events_categories` WHERE `id_event`=?", (id,))
   cursor.execute("DELETE FROM `events` WHERE `id`=?", (id,))
+  cursor.execute("UPDATE `subevents` SET `deleted`=1 WHERE `id_event`=?", (id,))
 
   conn.commit()
   conn.close()
   return True
 
 def kill():
+  conn = sqlite3.connect(DB)
+  cursor = conn.cursor()
+  cursor.execute("UPDATE `subevents` SET `deleted`=1 WHERE `id`=?", (request.json["id"],))
+
+  conn.commit()
+  conn.close()
   return jsonify({"result": request.json["id"]})

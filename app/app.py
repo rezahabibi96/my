@@ -1,7 +1,8 @@
 from utils import database as init_db, populate as init_populate
 from models import users as users_md
-from routes import calendar as calendar_rt, auth as auth_rt, events as events_rt, users as users_rt, supervisors as supervisors_rt
-from flask import Flask, render_template
+from routes import calendar as calendar_rt, auth as auth_rt, events as events_rt, users as users_rt
+from routes import supervisors as supervisors_rt, participants as participants_rt
+from flask import Flask, render_template, flash
 
 
 HOST_NAME = "localhost"
@@ -20,6 +21,7 @@ app.register_blueprint(auth_rt.auth_bp)
 app.register_blueprint(events_rt.events_bp)
 app.register_blueprint(users_rt.users_bp)
 app.register_blueprint(supervisors_rt.supervisors_bp)
+app.register_blueprint(participants_rt.participants_bp)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -27,6 +29,7 @@ def index():
 
 @app.route("/root", methods=["GET"])
 def root():
+  flash('lalalal')
   return render_template("index.html")
 
 @app.before_first_request

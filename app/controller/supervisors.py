@@ -19,12 +19,13 @@ def get_supervisors():
    for dt in lecturers:
       id_lecturer = dt[0]
 
-      cursor.execute("SELECT `research_interest` FROM `lecturers` WHERE (`id_lecturer` = ?)", (id_lecturer,))
-      research_interest = cursor.fetchone()
+      cursor.execute("SELECT `research_interest`, `research_group` FROM `lecturers` WHERE (`id_lecturer` = ?)", (id_lecturer,))
+      research = cursor.fetchone()
       data.append({
          'id': id_lecturer,
          'nama': dt[1],
-         'ri': research_interest[-1],
+         'ri': research[0],
+         'rg': research[-1],
          'imgs': random.choice(['person_01', 'person_02', 'person_03', 'person_04'])
       })
    

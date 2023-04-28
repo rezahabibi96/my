@@ -63,6 +63,11 @@
           <button class="btn float-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button" {% if not current_user.is_authenticated %} hidden {% endif %}>
             <i class="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
           </button>
+          {% with messages = get_flashed_messages()[-1] %}
+          {% if messages %}
+              <p id="alert" class="alert alert-dark">{{ messages }}</p>
+          {% endif %}
+          {% endwith %}
           <h2 class="mb-5">List Supervisors</h2>
           <div class="table-responsive">
 
@@ -73,6 +78,7 @@
                   <th scope="col">ID</th>
                   <th scope="col">NAMA</th>
                   <th scope="col">RESEARCH INTEREST</th>
+                  <th scope="col">RESEARCH GROUP</th>
                 </tr>
               </thead>
               <tbody>
@@ -83,6 +89,7 @@
                   <td>{{ lecturer["id"] }}</td>
                   <td>{{ lecturer["nama"] }}</td>
                   <td>{{ lecturer["ri"] }}</td>
+                  <td>{{ lecturer["rg"] }}</td>
                   <td>
                     <ul class="persons">
                       <li>
@@ -101,6 +108,11 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+      setTimeout(function () {
+          document.getElementById('alert').remove()
+      }, 2000);
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

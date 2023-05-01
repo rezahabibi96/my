@@ -36,7 +36,7 @@ def get_mystudents():
   if not current_user.is_authenticated:
     flash('please login')
     return redirect(url_for('index'))
-  if not current_user.role == 'mahasiswa':
+  if not current_user.role == 'dosen':
     flash('you dont have access')
     return redirect(url_for('index'))
   data = users_ct.get_mystudents()
@@ -47,7 +47,7 @@ def get_mycompetitions():
   if not current_user.is_authenticated:
     flash('please login')
     return redirect(url_for('index'))
-  if not current_user.role == 'dosen':
+  if not current_user.role == 'mahasiswa':
     flash('you dont have access')
     return redirect(url_for('index'))  
   data = users_ct.get_mycompetitions()

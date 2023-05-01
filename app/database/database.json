@@ -137,12 +137,36 @@
             "password": "2201"
         },
         {
-            "id": "2043211118",
-            "fullname": "Albertus Eka Putra Haryanto, S.StatTr",
-            "username": "al",
-            "email": "2043211118@its.ac.id",
+            "id": "20431111",
+            "fullname": "Zicky Lukman",
+            "username": "zicky_lukman",
+            "email": "20431111@its.ac.id",
             "role": "mahasiswa",
-            "password": "2043211118"
+            "password": "20431111"
+        },
+        {
+            "id": "20432222",
+            "fullname": "Ridho Sholeh",
+            "username": "ridho_sholeh",
+            "email": "20432222@its.ac.id",
+            "role": "mahasiswa",
+            "password": "20432222"
+        },
+        {
+            "id": "20433333",
+            "fullname": "Albertus Eka",
+            "username": "albertus_eka",
+            "email": "20433333@its.ac.id",
+            "role": "mahasiswa",
+            "password": "20433333"
+        },
+        {
+            "id": "20434444",
+            "fullname": "Evan Setiawan",
+            "username": "evan_setiawan",
+            "email": "20434444@its.ac.id",
+            "role": "mahasiswa",
+            "password": "20434444"
         }
     ],
     "lecturers": [
@@ -266,7 +290,19 @@
     ],
     "students": [
         {
-            "id_student": "2043211118",
+            "id_student": "20431111",
+            "semester": "NULL"
+        },
+        {
+            "id_student": "20432222",
+            "semester": "NULL"
+        },
+        {
+            "id_student": "20433333",
+            "semester": "NULL"
+        },
+        {
+            "id_student": "20434444",
             "semester": "NULL"
         }
     ]

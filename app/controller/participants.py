@@ -21,7 +21,7 @@ def get_bimbingan_by_ep(id_ep=None):
    conn = sqlite3.connect(DB)
    cursor = conn.cursor()
 
-   cursor.execute("SELECT * FROM `bimbingan` WHERE (`id` = ?)", (id_ep,))
+   cursor.execute("SELECT * FROM `bimbingan` WHERE (`id_event_participant` = ?)", (id_ep,))
    data = cursor.fetchall()
 
    event = cursor.execute("SELECT `nama_dosen`, `title_event`, `nama_mahasiswa`, `id_mahasiswa`, `id_dosen` FROM `events_participants` WHERE (`id` = ?)", (id_ep,)).fetchone()

@@ -156,7 +156,7 @@
                               <p class="py-1 px-2 rounded text-white" style="background-color: #2e2c2c;"> Show Participants </p>
                             </a>
                           {% elif current_user.is_authenticated and current_user.role == 'mahasiswa' %}
-                            <a {% if not data["ep"] %} href="#" onclick="onSupervisors(); return false;" {% endif %}>
+                            <a {% if not data["ep"] %} href="#" onclick="onJoinEvent(); return false;" {% endif %}>
                               <p class="py-1 px-2 rounded text-white" style="background-color: #2e2c2c;"> Join Event </p>
                             </a>
                           {% endif %}
@@ -196,9 +196,25 @@
         s_children = supervisors.children[0];
         s_index = s_children.selectedIndex;
         s_value = parseInt(s_children[s_index].value);
-        console.log(s_value)
+        return s_value
+      }
+
+      function onSubevents() {
+        subevents = document.getElementById('subevents');
+        s_children = subevents.children[0];
+        s_index = s_children.selectedIndex;
+        s_value = parseInt(s_children[s_index].value);
+        return s_value
       }
       
+      function onJoinEvent() {
+        const title_event = document.getElementsByTagName('h1')[0].textContent.split(': ')[1];
+        // console.log(window.location.href)
+        // window.location.replace("/supervisors");
+        onSupervisors();
+        onSubevents();
+      }
+
       setTimeout(function () {
           document.getElementById('alert').remove()
       }, 2000);

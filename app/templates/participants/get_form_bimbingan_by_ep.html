@@ -6,15 +6,20 @@
     <meta name="description" content="">
     <meta name="author" content="rezahabibi96">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>Riwayat Bimbingan</title>
+    <title>Jadwalkan Bimbingan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../static/css.css">
+    <style>
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+        box-sizing: border-box;
+      }
+    </style>
   </head>
   <body>
     <header>
       <div class="container d-flex flex-column flex-md-row align-items-center pb-1 pt-1"><a href="/" class="d-flex align-items-center text-dark text-decoration-none"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="me-2" viewBox="0 0 118 94" role="img">
-            <title>Riwayat Bimbingan</title>
+            <title>Bootstrap</title>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z" fill="currentColor"></path>
           </svg><span class="fs-4">myDSB KompetisI</span></a>
           <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
@@ -28,7 +33,7 @@
               <a class="py-2 text-dark text-decoration-none" href="/signup">Sign up</a>
             {% endif %}
           </nav>
-      </div>
+        </div>
     </header>
     <div class="auto offcanvas offcanvas-start w-25" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
       <div class="offcanvas-header">
@@ -36,14 +41,13 @@
       </div>
       <div class="offcanvas-body px-0 h-auto">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
-          <li class="nav-item"><a href="users/home" class="nav-link text-truncate text-dark"><i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span></a></li>
+          <li class="nav-item"><a href="/users/home" class="nav-link text-truncate text-dark"><i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span></a></li>
           <li><a href={% if current_user.role == 'dosen' %} /users/students {% else %} /users/competitions {% endif %} class="nav-link text-truncate text-dark"><i class="fs-5 bi-grid"></i><span class="ms-1 d-none d-sm-inline">
             {% if current_user.role == 'dosen' %}
             My Student
             {% else %}
             My Competition
-            {% endif %}
-          </span></a></li>
+            {% endif %}</span></a></li>
           <li class="dropdown"><a href="#" class="nav-link dropdown-toggle text-truncate text-dark" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="fs-5 bi-people"></i><span class="ms-1 d-none d-sm-inline">My Account</span></a>
             <ul class="dropdown-menu text-small" aria-labelledby="dropdown">
               <li><a class="dropdown-item text-dark" href="/users/profile">My Profile</a></li>
@@ -57,10 +61,11 @@
         </ul>
       </div>
     </div>
-    <div class="container p-5">
+    <div class="container-fluid pt-5">
       <div class="row pt-1">
-        <div class="col-12 min-vh-100 p-5 container">
-          <button class="btn float-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button" {% if not current_user.is_authenticated %} hidden {% endif %}>
+        <div class="col-8 min-vh-100 pt-5 container">
+          <!-- toggler -->
+          <button class="btn float-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button">
             <i class="bi bi-arrow-right-square-fill fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
           </button>
           {% with messages = get_flashed_messages()[-1] %}
@@ -68,65 +73,76 @@
               <p id="alert" class="alert alert-dark">{{ messages }}</p>
             {% endif %}
           {% endwith %}
-          <h2 class="mb-5">
-            Riwayat Bimbingan Oleh <b>{{ event[0]|upper }}</b>
-            <br>
-            Mahasiswa: {{ event[2] }}
-            <br>
-            Event: {{ event[1] }}
-            <br>
-            <br>
-            <a class="btn btn-sm btn-dark" href="/ep/{{id_ep}}/bimbingan/new">Bimbingan Baru</a>
-            <a class="btn btn-sm btn-dark" href="https://calendly.com/rezahabibi96/30min" target="_blank">Using Calendly</a>
-          </h2>
-          <div class="table-responsive">
-
-            <table class="table custom-table">
-              <thead>
-                <tr>
-                  <th scope="col">NO</th>
-                  <th scope="col">MATERI DISKUSI</th>
-                  <th scope="col">LINK RESOURCE</th>
-                  <th scope="col">LAMA</th>
-                  <th scope="col">JADWAL</th>
-                </tr>
-              </thead>
-              <tbody>
-
-                {% for dt in data %}
-                <tr>
-                  <td>{{ loop.index }}</td>
-                  <td>
-                    {% if dt[2] != None %} {{ dt[2] }} {% else %} Tidak Ada {% endif %}
-                  </td>
-                  <td>
-                    {% if dt[3] != None %} {{ dt[3] }} {% else %} Tidak Ada {% endif %}
-                  </td>
-                  <td>
-                    {% if dt[4] != None %} {{ dt[4] }} {% else %} Tidak Ada {% endif %}
-                  </td>
-                  <td>
-                    {% if dt[5] != None %} {{ dt[5] }} {% else %} Tidak Ada {% endif %}
-                  </td>
-                  <td>
-                    <a href="/ep/{{id_ep}}/bimbingan/{{dt[0]}}/edit">
-                      <button type="button" class="btn btn-secondary btn-sm">Edit Data</button>
-                    </a>
-                  </td>
-                </tr>
-                {% endfor %}
-                
-              </tbody>
-            </table>
+          <div class="container rounded bg-white mb-5">
+            <div class="row">
+              <div class="align-items-center mt-3">
+                <h4 class="text-right">Jadwalkan Bimbingan</h4>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <form method="post" action="/ep/{{id_ep}}/bimbingan/{{action_ep}}" class="col-md-6">
+              <div>
+                <div class="p-3 py-5">
+                  <div class="row mt-2">
+                    <label class="labels">Materi Diskusi</label>
+                      <input type="text" name="materi-diskusi" id="materi-diskusi" required class="form-control" placeholder="Materi Diskusi" value="">
+                  </div>
+                  <div class="row mt-3">
+                    <label class="labels">Link Resource</label>
+                    <input type="text" name="link-resource" id="link-resource" class="form-control" placeholder="Link Resource" value="">
+                  </div>
+                  <div class="row mt-3">
+                    <label class="labels">Lama Durasi</label>
+                    <input type="text" name="lama-durasi" id="lama-durasi" class="form-control" placeholder="Lama Durasi" value="">
+                  </div>
+                  <div class="row mt-3">
+                    <label class="labels">Tanggal Bimbingan</label>
+                    <input type="date" name="tanggal-bimbingan" id="tanggal-bimbingan" required class="form-control" placeholder="tanggal Bimbingan" value="">
+                  </div>
+                  <!-- <div class="row mt-3" hidden>
+                    <div class="col-md-6">
+                      <label class="labels">Full Name</label>
+                      <input type="text" class="form-control" placeholder="full name" value={{ current_user.fullname }}>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="labels">Family Name</label>
+                      <input type="text" class="form-control" value="" placeholder="family name">
+                    </div>
+                  </div> -->
+                  <div class="row mt-5 text-start">
+                    <button class="btn btn-secondary profile-button" type="submit">
+                      Submit Bimbingan
+                    </button>
+                  </div>
+                </div>
+              </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
       setTimeout(function () {
           document.getElementById('alert').remove()
       }, 2000);
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+      var new_password = document.getElementById("new-password")
+      var confirm_password = document.getElementById("confirm-password");
+
+      function validatePassword(){
+        if(new_password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("passwords do not match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+      }
+
+      new_password.onchange = validatePassword;
+      confirm_password.onkeyup = validatePassword;
+  </script>
   </body>
 </html>

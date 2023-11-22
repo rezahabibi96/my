@@ -1,7 +1,7 @@
 from utils import database as init_db, populate as init_populate
 from models import users as users_md
 from routes import calendar as calendar_rt, auth as auth_rt, events as events_rt, users as users_rt
-from routes import supervisors as supervisors_rt, participants as participants_rt
+from routes import supervisors as supervisors_rt, participants as participants_rt, searchs as searchs_rt 
 from flask import Flask, render_template, flash
 
 
@@ -22,15 +22,15 @@ app.register_blueprint(events_rt.events_bp)
 app.register_blueprint(users_rt.users_bp)
 app.register_blueprint(supervisors_rt.supervisors_bp)
 app.register_blueprint(participants_rt.participants_bp)
+app.register_blueprint(searchs_rt.searchs_bp)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
   return render_template("index.html")
 
-@app.route("/root", methods=["GET"])
+@app.route("/index", methods=["GET"])
 def root():
-  flash('lalalal')
-  return render_template("index.html")
+  return "myDSB kompetisi"
 
 @app.before_first_request
 def initialize_config():

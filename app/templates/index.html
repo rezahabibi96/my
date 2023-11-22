@@ -66,26 +66,26 @@
         <h2 class="evt100">CALENDAR EVENT</h2>
         <div class="evt50">
           <label>Start</label>
-          <input id="evtStart" type="datetime-local" required>
+          <input id="evtStart" type="datetime-local" required {% if not current_user.is_authenticated or not current_user.role == 'dosen' %} disabled {% endif %}>
         </div>
         <div class="evt50">
           <label>End</label>
-          <input id="evtEnd" type="datetime-local" required>
+          <input id="evtEnd" type="datetime-local" required {% if not current_user.is_authenticated or not current_user.role == 'dosen' %} disabled {% endif %}>
         </div>
         <div class="evt50">
           <label>Text Color</label>
-          <input id="evtColor" type="color" value="#000000" required>
+          <input id="evtColor" type="color" value="#000000" required {% if not current_user.is_authenticated or not current_user.role == 'dosen' %} disabled {% endif %}>
         </div>
         <div class="evt50">
           <label>Background Color</label>
-          <input id="evtBG" type="color" value="#ffdbdb" required>
+          <input id="evtBG" type="color" value="#ffdbdb" required {% if not current_user.is_authenticated or not current_user.role == 'dosen' %} disabled {% endif %}>
         </div>
         <div class="evt100">
           <label>Event</label>
-          <input id="evtTxt" type="text" required>
+          <input id="evtTxt" type="text" required {% if not current_user.is_authenticated or not current_user.role == 'dosen' %} disabled {% endif %}>
         </div>
         <div class="evt100">
-          <fieldset>
+          <fieldset {% if not current_user.is_authenticated or not current_user.role == 'dosen' %} disabled {% endif %}>
             <label>Category</label>
             <input type="checkbox" name="category" value="1">data sains <br>
             <input type="checkbox" name="category" value="2">kewirausahaan <br>
@@ -95,11 +95,11 @@
         </div>
         <div class="evt100">
           <label>Detail</label>
-          <textarea name="detail" id="detail" cols="30" rows="10" style="width: 100%;"></textarea>
+          <textarea name="detail" id="detail" cols="30" rows="10" style="width: 100%;" {% if not current_user.is_authenticated or not current_user.role == 'dosen' %} disabled {% endif %}></textarea>
         </div>
         <div class="evt100" id="subevent">
           <label style="display: inline;">Subevent</label>
-          <button onclick="addSub(); return false;" style="display: inline; width: 10%; background-color: rosybrown; border-color: rosybrown; padding-top: 3px;">+</button>
+          <button onclick="addSub(); return false;" style="display: inline; width: 10%; background-color: rosybrown; border-color: rosybrown; padding-top: 3px;" {% if not current_user.is_authenticated or not current_user.role == 'dosen' %} disabled {% endif %}>+</button>
         </div>
         <div id="js">
           <!-- <div id="se_00" style="width: 100%; display: flex;">

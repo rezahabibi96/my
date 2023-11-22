@@ -24,7 +24,7 @@
           <a class="me-3 py-2 text-dark text-decoration-none" href="/supervisors">Supervisors</a>
           {% if current_user.is_authenticated %}
             <a class="me-3 py-2 text-dark text-decoration-none" href="/signout">Sign out</a>
-            <a class="py-2 text-dark text-decoration-none" href="/users/home">{{ current_user.username }}</a>
+            <a id="username" class="py-2 text-dark text-decoration-none" href="/users/home">{{ current_user.username }}</a>
           {% else %}
             <a class="me-3 py-2 text-dark text-decoration-none" href="/signin">Sign in</a>
             <a class="py-2 text-dark text-decoration-none" href="/signup">Sign up</a>
@@ -78,7 +78,7 @@
           <div class="col-lg-8 col-xl-6">
             <div class="card border-top border-bottom border-3" style="border-color: #2e2c2c !important;">
               <div class="card-body p-5">
-                <h1 class="lead fw-bold mb-5" style="color: #2e2c2c;">Event's Title: {{ data['tit'] }}</h1>
+                <h1 id="title_event" class="lead fw-bold mb-5" style="color: #2e2c2c;">Event's Title: {{ data['tit'] }}</h1>
                 <div class="row">
                   <div class="col mb-3">
                     <p class="small text-muted mb-1">Start Date:</p>
@@ -196,7 +196,7 @@
         s_children = supervisors.children[0];
         s_index = s_children.selectedIndex;
         s_value = parseInt(s_children[s_index].value);
-        return s_value
+        return {"id_dosen":s_value, "nama_dosen": s_children[s_index].text}
       }
 
       function onSubevents() {
@@ -204,15 +204,31 @@
         s_children = subevents.children[0];
         s_index = s_children.selectedIndex;
         s_value = parseInt(s_children[s_index].value);
-        return s_value
+        return {"id_subevent":s_value, "keterangan_subevent": s_children[s_index].text}
       }
       
+      function onEvents() {
+        id_event = window.location.href.split('/')[4]
+        title_event = document.getElementById('title_event').textContent.split(':')[1]
+        return {"id_event":id_event, "title_event":title_event}
+      }
+
       function onJoinEvent() {
-        const title_event = document.getElementsByTagName('h1')[0].textContent.split(': ')[1];
-        // console.log(window.location.href)
-        // window.location.replace("/supervisors");
-        onSupervisors();
-        onSubevents();
+        supervisor = onSupervisors();
+        subevent = onSubevents();
+        event = onEvents();    
+        data = {
+          "id_event": event["id_event"],
+          "title_event": event["title_event"], 
+          "id_subevent": subevent["id_subevent"],
+          "keterangan_subevent": subevent["keterangan_subevent"],
+          "id_dosen": supervisor["id_dosen"],
+          "nama_dosen": supervisor["nama_dosen"],
+          "username": document.getElementById('username').textContent
+        }
+      
+        post("/join", data);
+        window.location.replace(window.location.href);
       }
 
       setTimeout(function () {
